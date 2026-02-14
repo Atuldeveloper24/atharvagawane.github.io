@@ -1,20 +1,259 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atharva Gawane | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: Arial; margin: 40px; }
-        h1 { color: #333; }
+        :root {
+            --bg: #0f172a;
+            --text: #f8fafc;
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.3);
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 40%);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+            background: rgba(15, 23, 42, 0.8);
+        }
+
+        nav .nav-content {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            opacity: 1;
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .hero-badge {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            animation: fadeInDown 1s ease;
+        }
+
+        h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            max-width: 600px;
+            opacity: 0.8;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        /* Projects */
+        section {
+            padding: 6rem 0;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            padding: 2rem;
+            border-radius: 20px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 40px -10px var(--accent-glow);
+        }
+
+        .project-card h3 {
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .project-card p {
+            opacity: 0.7;
+            font-size: 0.95rem;
+        }
+
+        /* Contact */
+        .contact {
+            text-align: center;
+            background: var(--card-bg);
+            padding: 4rem;
+            border-radius: 30px;
+            border: 1px solid var(--glass-border);
+            margin-bottom: 6rem;
+        }
+
+        .email-wrapper {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px dashed var(--accent);
+            font-family: monospace;
+            color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 4rem 0;
+            opacity: 0.5;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            .contact { padding: 2rem; }
+        }
     </style>
 </head>
 <body>
-    <h1>Hi, I'm [Your Name]!</h1>
-    <p>This is my portfolio for DS assignments.</p>
-    <h2>My Work</h2>
-    <ul>
-        <li>Assignment 1: [Brief description]</li>
-        <li>Assignment 2: [Brief description]</li>
-    </ul>
-    <p>Contact: <!--email_off-->23f2003721@ds.study.iitm.ac.in<!--/email_off--></p>
+
+    <nav>
+        <div class="nav-content">
+            <a href="#home">Home</a>
+            <a href="#work">Work</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <header id="home">
+        <div class="container">
+            <div class="hero-badge">IIT Madras BS Degree Student</div>
+            <h1>Atharva Gawane</h1>
+            <p class="subtitle">Showcasing data science projects and technical explorations in modern web engineering.</p>
+        </div>
+    </header>
+
+    <section id="work" class="container">
+        <h2>Selected Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>Data Analysis Pipeline</h3>
+                <p>Automated ingestion and visualization of large-scale datasets using Python and D3.js.</p>
+            </div>
+            <div class="project-card">
+                <h3>Machine Learning Models</h3>
+                <p>Developing predictive models for social impact and environmental monitoring.</p>
+            </div>
+            <div class="project-card">
+                <h3>Web Applications</h3>
+                <p>Creating responsive and high-performance user interfaces with modern frameworks.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="container">
+        <div class="contact">
+            <h2>Get in Touch</h2>
+            <p>I'm always open to discussing new projects and opportunities.</p>
+            <div class="email-wrapper">
+                <!--email_off-->23f2003721@ds.study.iitm.ac.in<!--/email_off-->
+            </div>
+        </div>
+    </section>
+
+    <footer class="container">
+        <p>&copy; 2026 Atharva Gawane. All rights reserved.</p>
+    </footer>
+
 </body>
 </html>
