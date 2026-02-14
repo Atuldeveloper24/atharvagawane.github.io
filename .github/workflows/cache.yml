@@ -1,0 +1,29 @@
+name: Cache Dependencies
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  cache-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Cache dummy file
+        id: cache-step
+        uses: actions/cache@v4
+        with:
+          path: cached-file.txt
+          key: cache-f3c29a1
+
+      - name: prime-cache-f3c29a1
+        run: |
+          echo "Cache hit: ${{ steps.cache-step.outputs.cache-hit }}"
+          if [ "${{ steps.cache-step.outputs.cache-hit }}" == "true" ]; then
+            echo "Cache Hit!"
+          else
+            echo "Cache Miss!"
+          fi
